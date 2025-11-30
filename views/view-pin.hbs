@@ -1,0 +1,19 @@
+<h1>{{t "viewPin.title"}}</h1>
+
+{{#if error}}
+  <p class="error">{{t "viewPin.error"}}</p>
+{{/if}}
+
+{{#if attempts}}
+  <p>{{t "viewPin.attempts" attempts=attempts}}</p>
+{{/if}}
+
+<form action="/view/{{secretId}}" method="GET">
+  <input type="hidden" name="token" value="{{token}}">
+
+  <label for="pin">{{t "viewPin.label"}}</label>
+  <input type="text" id="pin" name="pin" required maxlength="20" pattern="[a-zA-Z0-9]+" autofocus>
+
+  <button type="submit">{{t "viewPin.submit"}}</button>
+</form>
+

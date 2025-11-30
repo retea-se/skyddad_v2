@@ -1,0 +1,49 @@
+# Skyddad v2 – .cursorrules
+
+## Kontekst & mål
+
+- Detta repo är "Skyddad v2" för retea.se – en säker engångsdelning av hemligheter.
+- Stack: Node.js + Express, Handlebars-views, MySQL, i18n (sv/en).
+- Följ alltid docs/PLAN.md, docs/SECURITY.md och docs/GDPR.md. Om något krockar vinner dokumentationen.
+
+## Arkitektur & filer
+
+- Behåll den definierade projektstrukturen (src/, views/, services/, middleware/, docs/, etc). Skapa inte nya top-level-mappar utan tydlig motivering.
+- Ändra ALDRIG root `.htaccess` eller `/retea/.htaccess`. Lägg bara minimal, isolerad `.htaccess` i projektet vid behov.
+- Lägg konfiguration i `config/` och hemligheter i ENV-variabler, aldrig hårdkodat.
+
+## Säkerhet & GDPR
+
+- Alla nya endpoints: validera input, sanera data, undvik SQL injection (parameteriserade queries).
+- POST/PUT/DELETE måste ha CSRF-skydd och lämplig rate limiting.
+- Loggar får inte innehålla PII. Använd hash/anonymisering av IP/user agent enligt docs/GDPR.md.
+- Hemligheter krypteras med AES-256-CBC; PIN lagras med bcrypt. Följ `services/encryption.js`-mönstret.
+
+## i18n & UI
+
+- Allt användargränssnitt ska gå via i18n (`locales/sv.json` och `locales/en.json`), inte hårdkodad text i templates.
+- Default-språk är svenska; se till att engelska översättningar finns när du lägger till ny text.
+- Följ retea.se:s design: mobil-först, tillgänglig, responsiv layout.
+
+## Admin & API
+
+- Endpoints under `/admin/api/*` får ALDRIG exponeras utan autentisering/auktorisering.
+- Återanvänd befintligt admin-/auth-flöde där det är möjligt eller lägg till dedikerad admin-middleware.
+
+## Scriptkörning & timeouts
+
+- När du genererar exempel för scripts (Node, shell, PowerShell, Docker):
+  - Inkludera alltid rimlig timeout/avslutshantering.
+  - Undvik långvariga blockande kommandon utan timeout.
+  - För Docker: använd i första hand detached (`up -d`) och begräns loggoutput.
+
+## Testning & kvalitet
+
+- När du ändrar logik: uppdatera eller lägg till Jest-tester (unit) och vid behov Supertest-integrationstester.
+- Håll koden enkel och lättläst. Prioritera tydlighet framför “smart” abstraktion.
+- Kör lint/formatter innan du föreslår commits. Justera hellre befintlig stil än att införa en ny.
+
+## Git & secrets
+
+- Commita aldrig `.env`, nycklar eller andra secrets. Respektera `.gitignore`.
+- Commits ska vara små och tematiska, med tydliga commit-meddelanden som beskriver ändringen.

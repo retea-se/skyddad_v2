@@ -1,0 +1,73 @@
+# Dependencies
+node_modules/
+package-lock.json
+yarn.lock
+
+# Environment variables
+.env
+.env.local
+.env.development
+.env.production
+.env.test
+
+# Build output
+dist/
+build/
+*.tsbuildinfo
+
+# Logs
+*.log
+logs/
+session_log.md
+session_history/
+
+# Testing
+coverage/
+.nyc_output/
+.jest/
+test-results/
+*.test.js
+test-dry-run.js
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# Cache
+.cache/
+.parcel-cache/
+
+# Temporary files
+*.tmp
+*.temp
+
+# AI/Development tools (not needed in repo)
+instructions/
+contexts/
+meta/
+ai-context.json
+ai-profile.json
+workspace-manifest.json
+
+# Project status/checklist files (internal use only)
+COMMIT_READY.md
+PROJECT_COMPLETE.md
+PROJECT_STATUS.md
+
+# Templates (not needed in repo)
+tools/TEMPLATE_*.md
+docs/decisions/000-template.md
+
+# Scripts (keep only essential ones)
+Scripts/test-*.js
+Scripts/new-workspace.ps1
+
+# Session history (already covered but explicit)
+session_history/
+
+# OS files
+Thumbs.db
+.DS_Store

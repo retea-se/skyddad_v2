@@ -1,0 +1,117 @@
+{
+  "app": {
+    "title": "Skyddad",
+    "tagline": "Secure one-time secret sharing"
+  },
+  "meta": {
+    "home": {
+      "title": "Skyddad - Secure One-Time Sharing",
+      "description": "Share sensitive information securely. Messages are automatically deleted after viewing or expiration."
+    },
+    "view": {
+      "title": "Message - Skyddad",
+      "description": "View your secure message"
+    },
+    "success": {
+      "title": "Link Created - Skyddad",
+      "description": "Your secure link is ready"
+    }
+  },
+  "nav": {
+    "home": "Home",
+    "create": "Create"
+  },
+  "home": {
+    "welcome": "Skyddad",
+    "description": "Share sensitive information securely. The message is automatically deleted after viewing.",
+    "form": {
+      "secretLabel": "Your message:",
+      "pinLabel": "PIN code (optional, for extra security):",
+      "expiresLabel": "Valid for:",
+      "expires1h": "1 hour",
+      "expires24h": "24 hours",
+      "expires7d": "7 days",
+      "submit": "Create link"
+    }
+  },
+  "view": {
+    "title": "Message",
+    "warning": "⚠️ This message can only be viewed once and has now been deleted.",
+    "createNew": "Create new message"
+  },
+  "viewPin": {
+    "title": "Enter PIN",
+    "label": "PIN:",
+    "attempts": "Attempts: {{attempts}} / 5",
+    "error": "Incorrect PIN. Please try again.",
+    "submit": "View message"
+  },
+  "success": {
+    "title": "Link Created",
+    "description": "Your link is ready. Share it carefully - it can only be used once.",
+    "copyButton": "Copy link",
+    "copied": "Link copied!",
+    "warning": "⚠️ This link can only be used once and will disappear after viewing."
+  },
+  "error": {
+    "invalidLink": "Invalid Link",
+    "invalidLinkMessage": "This link no longer works. It may have expired or be incorrect.",
+    "notFound": "Message Not Found",
+    "notFoundMessage": "This message no longer exists. It may have expired or already been viewed.",
+    "tooManyAttempts": "Too Many Attempts",
+    "tooManyAttemptsMessage": "Too many incorrect PIN attempts. For security reasons, this message can no longer be viewed.",
+    "decryptError": "Error",
+    "decryptErrorMessage": "Could not open the message. Please contact us if the problem persists.",
+    "viewError": "Error",
+    "viewErrorMessage": "An error occurred while viewing the message.",
+    "backHome": "Back to home page"
+  },
+  "404": {
+    "title": "Page Not Found",
+    "message": "Sorry, we couldn't find the page you're looking for. It may have been moved or removed.",
+    "backHome": "Back to home page"
+  },
+  "500": {
+    "title": "Something Went Wrong",
+    "message": "Something went wrong on our end. We're working to fix the problem. Please try again in a moment.",
+    "backHome": "Back to home page"
+  },
+  "faq": {
+    "pageTitle": "Frequently Asked Questions",
+    "metaTitle": "FAQ - Skyddad",
+    "metaDescription": "Frequently asked questions about Skyddad - secure one-time secret sharing. Learn more about security, encryption, and how the service works."
+  },
+  "privacy": {
+    "cookieTitle": "Cookie Consent",
+    "cookieMessage": "We use cookies to improve your experience. Choose your preferences below.",
+    "cookieNecessary": "Necessary only",
+    "cookieAcceptAll": "Accept all",
+    "policy": "Privacy Policy",
+    "pageTitle": "Privacy Policy",
+    "dataCollection": {
+      "title": "Data Collection",
+      "text": "We only collect data necessary to provide the service. This includes your message (which is protected with encryption), information about your internet connection (which is made anonymous), and information about which browser you use (partially anonymized)."
+    },
+    "dataUsage": {
+      "title": "How We Use Data",
+      "text": "Your message is stored securely until it is viewed or expires. Information about your internet connection and browser is made anonymous immediately and used only to ensure the service works correctly and to protect against abuse."
+    },
+    "dataRetention": {
+      "title": "Data Retention",
+      "text": "Secrets are automatically deleted after viewing or expiration. Logs are retained for 90 days and then automatically deleted."
+    },
+    "yourRights": {
+      "title": "Your Rights",
+      "text": "Under GDPR, you have the right to:",
+      "right1": "Request information about what data we have about you",
+      "right2": "Request deletion of your data (if identifiable)",
+      "right3": "Contact us with questions about data protection"
+    },
+    "contact": {
+      "title": "Contact",
+      "text": "For questions about data protection or to exercise your rights, contact us:",
+      "link": "retea.se/kontakt"
+    }
+  }
+}
+

@@ -1,0 +1,117 @@
+{
+  "app": {
+    "title": "Skyddad",
+    "tagline": "Säker engångsdelning av hemligheter"
+  },
+  "meta": {
+    "home": {
+      "title": "Skyddad - Säker engångsdelning",
+      "description": "Dela känslig information säkert. Meddelanden raderas automatiskt efter visning eller utgångstid."
+    },
+    "view": {
+      "title": "Meddelande - Skyddad",
+      "description": "Visa ditt säkra meddelande"
+    },
+    "success": {
+      "title": "Länk skapad - Skyddad",
+      "description": "Din säkra länk är klar"
+    }
+  },
+  "nav": {
+    "home": "Hem",
+    "create": "Skapa"
+  },
+  "home": {
+    "welcome": "Skyddad",
+    "description": "Dela känslig information säkert. Meddelandet raderas automatiskt efter visning.",
+    "form": {
+      "secretLabel": "Ditt meddelande:",
+      "pinLabel": "PIN-kod (valfritt, för extra säkerhet):",
+      "expiresLabel": "Giltig i:",
+      "expires1h": "1 timme",
+      "expires24h": "24 timmar",
+      "expires7d": "7 dagar",
+      "submit": "Skapa länk"
+    }
+  },
+  "view": {
+    "title": "Meddelande",
+    "warning": "⚠️ Detta meddelande kan bara visas en gång och har nu raderats.",
+    "createNew": "Skapa nytt meddelande"
+  },
+  "viewPin": {
+    "title": "Ange PIN",
+    "label": "PIN:",
+    "attempts": "Försök: {{attempts}} / 5",
+    "error": "Fel PIN. Försök igen.",
+    "submit": "Visa meddelande"
+  },
+  "success": {
+    "title": "Länk skapad",
+    "description": "Din länk är klar. Dela den med försiktighet - den kan bara användas en gång.",
+    "copyButton": "Kopiera länk",
+    "copied": "Länk kopierad!",
+    "warning": "⚠️ Denna länk kan bara användas en gång och kommer att försvinna efter visning."
+  },
+  "error": {
+    "invalidLink": "Ogiltig länk",
+    "invalidLinkMessage": "Denna länk fungerar inte längre. Den kan ha gått ut eller vara felaktig.",
+    "notFound": "Meddelande hittades inte",
+    "notFoundMessage": "Detta meddelande finns inte längre. Det kan ha gått ut eller redan ha visats.",
+    "tooManyAttempts": "För många försök",
+    "tooManyAttemptsMessage": "För många felaktiga PIN-försök. Av säkerhetsskäl kan detta meddelande inte längre visas.",
+    "decryptError": "Fel",
+    "decryptErrorMessage": "Kunde inte öppna meddelandet. Kontakta oss om problemet kvarstår.",
+    "viewError": "Fel",
+    "viewErrorMessage": "Ett fel uppstod vid visning av meddelandet.",
+    "backHome": "Tillbaka till startsidan"
+  },
+  "404": {
+    "title": "Sidan hittades inte",
+    "message": "Tyvärr kunde vi inte hitta den sida du letar efter. Den kan ha flyttats eller tagits bort.",
+    "backHome": "Tillbaka till startsidan"
+  },
+  "500": {
+    "title": "Ett fel uppstod",
+    "message": "Något gick fel på vår sida. Vi arbetar med att åtgärda problemet. Försök igen om en stund.",
+    "backHome": "Tillbaka till startsidan"
+  },
+  "faq": {
+    "pageTitle": "Vanliga frågor",
+    "metaTitle": "Vanliga frågor - Skyddad",
+    "metaDescription": "Svar på vanliga frågor om Skyddad - säker engångsdelning av hemligheter. Lär dig mer om säkerhet, kryptering och hur tjänsten fungerar."
+  },
+  "privacy": {
+    "cookieTitle": "Cookie-samtycke",
+    "cookieMessage": "Vi använder cookies för att förbättra din upplevelse. Välj dina preferenser nedan.",
+    "cookieNecessary": "Endast nödvändiga",
+    "cookieAcceptAll": "Acceptera alla",
+    "policy": "Integritetspolicy",
+    "pageTitle": "Integritetspolicy",
+    "dataCollection": {
+      "title": "Datainsamling",
+      "text": "Vi samlar endast in data som är nödvändig för att tillhandahålla tjänsten. Detta inkluderar ditt meddelande (som skyddas med kryptering), information om din internetanslutning (som görs anonym), och information om vilken webbläsare du använder (delvis anonymiserad)."
+    },
+    "dataUsage": {
+      "title": "Hur vi använder data",
+      "text": "Ditt meddelande lagras säkert tills det visas eller går ut. Information om din internetanslutning och webbläsare görs anonym direkt och används endast för att säkerställa att tjänsten fungerar korrekt och för att skydda mot missbruk."
+    },
+    "dataRetention": {
+      "title": "Databevarande",
+      "text": "Hemligheter raderas automatiskt efter visning eller utgångstid. Loggar behålls i 90 dagar och raderas sedan automatiskt."
+    },
+    "yourRights": {
+      "title": "Dina rättigheter",
+      "text": "Enligt GDPR har du rätt att:",
+      "right1": "Begära information om vilken data vi har om dig",
+      "right2": "Begära radering av din data (om identifierbar)",
+      "right3": "Kontakta oss med frågor om dataskydd"
+    },
+    "contact": {
+      "title": "Kontakt",
+      "text": "För frågor om dataskydd eller för att utöva dina rättigheter, kontakta oss:",
+      "link": "retea.se/kontakt"
+    }
+  }
+}
+

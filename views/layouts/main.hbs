@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="{{locale}}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{title}} - {{t "app.title"}}</title>
+  {{#if meta}}{{> meta-tags}}{{/if}}
+  {{#if meta}}{{> structured-data}}{{/if}}
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+</head>
+<body>
+  <header>
+    {{> language-switcher}}
+  </header>
+  <main>
+    {{{body}}}
+  </main>
+  {{> cookie-consent}}
+  <script src="/js/cookie-consent.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,43 @@
+<h1>{{t "faq.pageTitle"}}</h1>
+
+<div itemscope itemtype="https://schema.org/FAQPage">
+  {{#each faq.questions}}
+  <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question" class="faq-item">
+    <h2 itemprop="name">{{this.question}}</h2>
+    <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+      <div itemprop="text">
+        <p>{{this.answer}}</p>
+        {{#if this.details}}
+        <ul>
+          {{#each this.details}}
+          <li>{{this}}</li>
+          {{/each}}
+        </ul>
+        {{/if}}
+      </div>
+    </div>
+  </div>
+  {{/each}}
+</div>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {{#each faq.questions}}
+    {
+      "@type": "Question",
+      "name": "{{this.question}}",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "{{this.answer}}{{#if this.details}} {{#each this.details}}{{this}} {{/each}}{{/if}}"
+      }
+    }{{#unless @last}},{{/unless}}
+    {{/each}}
+  ]
+}
+</script>
+
+<a href="/">{{t "nav.home"}}</a>
+

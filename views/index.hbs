@@ -1,0 +1,21 @@
+<h1>{{t "home.welcome"}}</h1>
+<p>{{t "home.description"}}</p>
+
+<form action="/create" method="POST">
+  <input type="hidden" name="_csrf" value="{{csrfToken}}">
+  <label for="secret">{{t "home.form.secretLabel"}}</label>
+  <textarea id="secret" name="secret" rows="10" required maxlength="10000"></textarea>
+
+  <label for="pin">{{t "home.form.pinLabel"}}</label>
+  <input type="text" id="pin" name="pin" maxlength="20" pattern="[a-zA-Z0-9]+">
+
+  <label for="expires">{{t "home.form.expiresLabel"}}</label>
+  <select id="expires" name="expires">
+    <option value="1h">{{t "home.form.expires1h"}}</option>
+    <option value="24h" selected>{{t "home.form.expires24h"}}</option>
+    <option value="7d">{{t "home.form.expires7d"}}</option>
+  </select>
+
+  <button type="submit">{{t "home.form.submit"}}</button>
+</form>
+
