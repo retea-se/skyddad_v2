@@ -7,7 +7,7 @@ import { config } from '../../config/index.js';
  * Validates API key from Authorization header only (Bearer token)
  * Uses constant-time comparison to prevent timing attacks
  */
-export const authAdmin = (req: Request, res: Response, next: NextFunction) => {
+export const authAdmin = (req: Request, res: Response, next: NextFunction): void => {
   if (!config.features.adminApi) {
     res.status(503).json({ error: 'Admin API is disabled' });
     return;
@@ -29,7 +29,7 @@ export const authAdmin = (req: Request, res: Response, next: NextFunction) => {
 
   // Constant-time comparison to prevent timing attacks
   const expectedKey = config.admin.apiKey;
-
+  
   // Check length first to avoid timing attack on length
   if (providedKey.length !== expectedKey.length) {
     res.status(401).json({ error: 'Unauthorized' });
