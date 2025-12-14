@@ -29,7 +29,7 @@ export const authAdmin = (req: Request, res: Response, next: NextFunction): void
 
   // Constant-time comparison to prevent timing attacks
   const expectedKey = config.admin.apiKey;
-  
+
   // Check length first to avoid timing attack on length
   if (providedKey.length !== expectedKey.length) {
     res.status(401).json({ error: 'Unauthorized' });

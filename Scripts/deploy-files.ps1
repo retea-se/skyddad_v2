@@ -28,10 +28,10 @@ foreach ($file in $filesToDeploy) {
     if (Test-Path $file) {
         Write-Host "Kopierar $file..." -ForegroundColor Yellow
         $remotePath = $serverPath + (Split-Path $file -Parent).Replace("\", "/")
-        
+
         # Använd safe-scp för att kopiera filen
         & .\Scripts\safe-scp.ps1 -Source $file -Destination $remotePath
-        
+
         if ($LASTEXITCODE -eq 0) {
             Write-Host "  ✅ $file kopierad" -ForegroundColor Green
         } else {
