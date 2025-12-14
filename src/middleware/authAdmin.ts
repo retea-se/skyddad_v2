@@ -1,43 +1,52 @@
 import { Request, Response, NextFunction } from 'express';
+import crypto from 'crypto';
 import { config } from '../../config/index.js';
 
 /**
  * Admin authentication middleware
- * Validates API key from Authorization header or query parameter
+ * Validates API key from Authorization header only (Bearer token)
+ * Uses constant-time comparison to prevent timing attacks
  */
 export const authAdmin = (req: Request, res: Response, next: NextFunction) => {
-  console.log(`[DEBUG authAdmin] ${req.method} ${req.path} - Admin API enabled: ${config.features.adminApi}, API Key set: ${!!config.admin.apiKey}`);
-
   if (!config.features.adminApi) {
-    console.log('[DEBUG authAdmin] Admin API is disabled');
     res.status(503).json({ error: 'Admin API is disabled' });
     return;
   }
 
   if (!config.admin.apiKey) {
-    console.log('[DEBUG authAdmin] Admin API key not configured');
     res.status(500).json({ error: 'Admin API key not configured' });
     return;
   }
 
-  // Check Authorization header
+  // Only accept Authorization header (Bearer token)
   const authHeader = req.get('Authorization');
-  const apiKeyFromHeader = authHeader?.replace('Bearer ', '');
-
-  // Check query parameter (for testing)
-  const apiKeyFromQuery = req.query.apiKey as string | undefined;
-
-  const providedKey = apiKeyFromHeader || apiKeyFromQuery;
-
-  console.log(`[DEBUG authAdmin] Provided key: ${providedKey ? 'YES' : 'NO'}, Expected key: ${config.admin.apiKey ? 'SET' : 'NOT SET'}`);
-
-  if (!providedKey || providedKey !== config.admin.apiKey) {
-    console.log('[DEBUG authAdmin] Unauthorized - returning 401');
+  if (!authHeader || !authHeader.startsWith('Bearer ')) {
     res.status(401).json({ error: 'Unauthorized' });
     return;
   }
 
-  console.log('[DEBUG authAdmin] Authorized - calling next()');
+  const providedKey = authHeader.replace('Bearer ', '').trim();
+
+  // Constant-time comparison to prevent timing attacks
+  const expectedKey = config.admin.apiKey;
+
+  // Check length first to avoid timing attack on length
+  if (providedKey.length !== expectedKey.length) {
+    res.status(401).json({ error: 'Unauthorized' });
+    return;
+  }
+
+  // Use timing-safe comparison
+  const isValid = crypto.timingSafeEqual(
+    Buffer.from(providedKey),
+    Buffer.from(expectedKey)
+  );
+
+  if (!isValid) {
+    res.status(401).json({ error: 'Unauthorized' });
+    return;
+  }
+
   next();
 };
 

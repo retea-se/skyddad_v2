@@ -5,10 +5,13 @@ Säkerhetsåtgärder och best practices.
 ## Kryptering
 
 ### Secrets
-- **Algoritm**: AES-256-CBC
+- **Algoritm**: AES-256-GCM (AEAD - Authenticated Encryption with Associated Data)
 - **IV**: Unik IV per secret (16 bytes, random)
+- **Auth Tag**: 16 bytes authentication tag för integritetskontroll
 - **Key**: 32 bytes (64 hex characters) från miljövariabel
-- **Lagring**: IV + encrypted data (base64 encoded)
+- **Lagring**: Format: `v1:IV:encrypted:authTag` (base64 encoded)
+- **Bakåtkompatibilitet**: Stödjer legacy AES-256-CBC format (`IV:encrypted`) för gamla secrets
+- **Integritet**: GCM autenticerar både kryptering och data, förhindrar modifieringsattacker
 
 ### PIN
 - **Algoritm**: bcrypt
@@ -44,11 +47,15 @@ Säkerhetsåtgärder och best practices.
 - HSTS (i production)
 
 ### Session Security
+- **Storage**:
+  - **Development**: MemoryStore (in-memory)
+  - **Production**: MySQL store (`express-mysql-session`) för persistens och klustring
 - **Cookie flags**:
   - `Secure`: Endast HTTPS (production)
   - `HttpOnly`: Ingen JavaScript-åtkomst
-  - `SameSite`: `Lax`
+  - `SameSite`: `strict` (production), `lax` (development)
   - `Max-Age`: 1 timme
+- **Session rotation**: Automatisk rotation vid användning (CSRF token regeneration)
 
 ## PIN Brute-Force Protection
 
@@ -59,10 +66,13 @@ Säkerhetsåtgärder och best practices.
 
 ## Admin API Security
 
-- **Autentisering**: API key (Bearer token eller query param)
+- **Autentisering**: API key via `Authorization: Bearer <token>` header endast
+  - Query parameter-stöd har tagits bort (säkerhetsförbättring)
+  - Konstanttidsjämförelse (`crypto.timingSafeEqual`) för att förhindra timing-attacker
 - **Lagring**: Miljövariabel (`ADMIN_API_KEY`)
 - **Rate limiting**: 100 requests per timme
 - **Endpoints**: Alla under `/admin/api/*` skyddade
+- **Loggning**: Ingen debug-loggning i produktion (minskar informationsläckage)
 
 ## Data Anonymisering
 
@@ -78,7 +88,8 @@ Säkerhetsåtgärder och best practices.
 
 ## Säkerhetschecklista
 
-- ✅ AES-256-CBC kryptering för secrets
+- ✅ AES-256-GCM kryptering för secrets (AEAD med integritetskontroll)
+- ✅ Bakåtkompatibilitet med legacy AES-256-CBC format
 - ✅ bcrypt för PIN-hash
 - ✅ CSRF-skydd för POST/PUT/DELETE
 - ✅ Rate limiting konfigurerad
@@ -86,9 +97,15 @@ Säkerhetsåtgärder och best practices.
 - ✅ SQL injection-skydd (parameterized queries)
 - ✅ XSS-skydd (Handlebars auto-escaping)
 - ✅ Secure headers (Helmet)
-- ✅ Session security (Secure, HttpOnly cookies)
+- ✅ Session security:
+  - ✅ MySQL session store i produktion (persistens och klustring)
+  - ✅ Secure, HttpOnly cookies
+  - ✅ SameSite=strict i produktion
 - ✅ PIN brute-force protection
-- ✅ Admin API autentisering
+- ✅ Admin API autentisering:
+  - ✅ Endast Authorization header (ingen query parameter)
+  - ✅ Konstanttidsjämförelse (timing-safe)
+  - ✅ Ingen debug-loggning i produktion
 - ✅ IP och user agent anonymisering
 
 ## Incident Response
@@ -106,6 +123,7 @@ Vid säkerhetsincident:
 | Datum | Ändring | Användare |
 |-------|---------|-----------|
 | 2025-01-XX | Security documentation skapad | AI-assistent |
+| 2025-01-XX | Säkerhetsförbättringar: GCM-kryptering, MySQL session store, förbättrad admin-API | AI-assistent |
 
 
 
