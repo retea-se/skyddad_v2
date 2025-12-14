@@ -16,12 +16,19 @@
     "lint:fix": "eslint src/**/*.ts --fix",
     "format": "prettier --write \"src/**/*.ts\" \"views/**/*.hbs\"",
     "format:check": "prettier --check \"src/**/*.ts\" \"views/**/*.hbs\"",
+    "lint-staged": "lint-staged",
     "prepare": "husky install",
     "migrate": "node scripts/run-migrations.js",
     "migrate:create": "node scripts/create-migration.js",
+    "test:db": "node scripts/test-db-connection.js",
     "lighthouse": "lhci autorun",
     "mcp:chrome:start": "node tools/start-chrome-devtools-mcp.js --headless=true --viewport=1920x1080",
-    "mcp:chrome:dry": "node tools/start-chrome-devtools-mcp.js --dry-run"
+    "mcp:chrome:dry": "node tools/start-chrome-devtools-mcp.js --dry-run",
+    "verify:deployment": "bash Scripts/verify-deployment.sh",
+    "setup:admin-proxy": "bash Scripts/setup-admin-proxy.sh",
+    "setup:cleanup-cron": "bash Scripts/setup-cleanup-cron.sh",
+    "setup:all": "bash Scripts/run-all-setup.sh",
+    "test:deployment": "powershell -ExecutionPolicy Bypass -File Scripts/test-deployment-simple.ps1"
   },
   "keywords": [
     "secrets",
@@ -76,5 +83,14 @@
   "engines": {
     "node": ">=18.0.0",
     "npm": ">=9.0.0"
+  },
+  "lint-staged": {
+    "src/**/*.ts": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "views/**/*.hbs": [
+      "prettier --write"
+    ]
   }
 }

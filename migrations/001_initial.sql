@@ -37,3 +37,6 @@ CREATE TABLE IF NOT EXISTS migrations_history (
   executed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+
+
+

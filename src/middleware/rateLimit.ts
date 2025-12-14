@@ -1,5 +1,5 @@
 import rateLimit from 'express-rate-limit';
-import { Request, Response, NextFunction } from 'express';
+import { Request } from 'express';
 
 /**
  * Rate limiter for creating secrets (10 per hour per IP)
@@ -38,4 +38,7 @@ export const pinAttemptRateLimit = rateLimit({
     return `${req.ip}:${secretId}`;
   },
 });
+
+
+
 

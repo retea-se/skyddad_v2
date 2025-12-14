@@ -1,6 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
 import crypto from 'crypto';
-import { config } from '../../config/index.js';
 
 /**
  * Generate CSRF token
@@ -22,10 +21,17 @@ export const validateCsrfToken = (token: string, sessionToken: string): boolean 
   );
 };
 
+// Extend session type
+declare module 'express-session' {
+  interface SessionData {
+    csrfToken?: string;
+  }
+}
+
 /**
  * CSRF middleware - add token to session and validate on POST
  */
-export const csrfMiddleware = (req: Request, res: Response, next: NextFunction): void => {
+export const csrfMiddleware = (req: Request, res: Response, next: NextFunction) => {
   // Initialize session if not exists
   if (!req.session) {
     return next();
@@ -45,7 +51,8 @@ export const csrfMiddleware = (req: Request, res: Response, next: NextFunction):
     const sessionToken = req.session.csrfToken;
 
     if (!token || !validateCsrfToken(token, sessionToken)) {
-      return res.status(403).json({ error: 'Invalid CSRF token' });
+      res.status(403).json({ error: 'Invalid CSRF token' });
+      return;
     }
 
     // Regenerate token after use
@@ -54,4 +61,6 @@ export const csrfMiddleware = (req: Request, res: Response, next: NextFunction):
 
   next();
 };
+
+
 

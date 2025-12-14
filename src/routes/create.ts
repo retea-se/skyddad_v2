@@ -6,8 +6,9 @@ import { generateSecretId, generateToken } from '../utils/token.js';
 import { validateSecretText, validatePIN } from '../utils/validation.js';
 import { hashIP, hashUserAgent } from '../utils/anonymize.js';
 import { createSecretRateLimit } from '../middleware/rateLimit.js';
+import { config } from '../../config/index.js';
 
-const router = Router();
+const router: Router = Router();
 
 const PIN_SALT_ROUNDS = 12;
 
@@ -87,15 +88,22 @@ router.post('/create', createSecretRateLimit, async (req: Request, res: Response
 
     // Generate token for link
     const token = generateToken(secretId);
-    const viewUrl = `/view/${secretId}?token=${token}`;
 
-    // Redirect to success page
-    res.redirect(`/success?id=${secretId}&token=${token}`);
+    // Redirect to success page (use basePath)
+    // TODO: Fix basePath loading from .env.production
+    // For now, hardcode /skyddad since we know the app is mounted there
+    const basePath = config.app.basePath || '/skyddad';
+    res.redirect(`${basePath}/success?id=${secretId}&token=${token}`);
+    return;
   } catch (error) {
     console.error('Error creating secret:', error);
     res.status(500).json({ error: 'Failed to create secret' });
+    return;
   }
 });
 
 export default router;
+
+
+
 

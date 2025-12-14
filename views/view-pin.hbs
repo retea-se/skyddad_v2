@@ -1,18 +1,23 @@
 <h1>{{t "viewPin.title"}}</h1>
 
 {{#if error}}
-  <p class="error">{{t "viewPin.error"}}</p>
+  <div class="error" role="alert" aria-live="polite">
+    <p>{{t "viewPin.error"}}</p>
+  </div>
 {{/if}}
 
 {{#if attempts}}
-  <p>{{t "viewPin.attempts" attempts=attempts}}</p>
+  <p class="attempts-info" aria-live="polite">{{t "viewPin.attempts" attempts=attempts}}</p>
 {{/if}}
 
-<form action="/view/{{secretId}}" method="GET">
+<form action="{{basePath}}/view/{{secretId}}" method="GET" aria-label="{{t "viewPin.title"}}">
   <input type="hidden" name="token" value="{{token}}">
 
-  <label for="pin">{{t "viewPin.label"}}</label>
-  <input type="text" id="pin" name="pin" required maxlength="20" pattern="[a-zA-Z0-9]+" autofocus>
+  <div class="form-group">
+    <label for="pin">{{t "viewPin.label"}} <span class="required" aria-label="obligatoriskt fält">*</span></label>
+    <input type="password" id="pin" name="pin" required maxlength="20" pattern="[a-zA-Z0-9]+" autofocus aria-required="true" aria-describedby="pin-help" autocomplete="current-password">
+    <small id="pin-help" class="form-help">{{t "viewPin.help" default="Endast bokstäver och siffror"}}</small>
+  </div>
 
   <button type="submit">{{t "viewPin.submit"}}</button>
 </form>

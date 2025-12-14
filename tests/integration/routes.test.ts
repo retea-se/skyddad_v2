@@ -30,9 +30,12 @@ describe('Routes Integration Tests', () => {
     const response = await request(app)
       .post('/create')
       .send({ secret: 'test message' });
-    
+
     // Should redirect on success or return error
     expect([302, 400, 500]).toContain(response.status);
   });
 });
+
+
+
 

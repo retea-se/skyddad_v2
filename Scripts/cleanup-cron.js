@@ -15,8 +15,8 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Load environment variables
-const envFile = process.env.NODE_ENV === 'production' 
-  ? '.env.production' 
+const envFile = process.env.NODE_ENV === 'production'
+  ? '.env.production'
   : '.env.development';
 
 dotenv.config({ path: path.resolve(__dirname, '..', envFile) });
@@ -32,7 +32,7 @@ const dbConfig = {
 
 async function cleanup() {
   const connection = await mysql.createConnection(dbConfig);
-  
+
   try {
     console.info('🧹 Starting cleanup...');
 
@@ -76,4 +76,7 @@ async function cleanup() {
 }
 
 cleanup();
+
+
+
 

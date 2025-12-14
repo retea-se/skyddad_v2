@@ -1,7 +1,7 @@
 # Dependencies
 node_modules/
-package-lock.json
 yarn.lock
+# Note: package-lock.json should be committed for reproducible builds
 
 # Environment variables
 .env
@@ -28,6 +28,7 @@ coverage/
 test-results/
 *.test.js
 test-dry-run.js
+tests/  # Test files not needed for deployment
 
 # IDE
 .vscode/
@@ -43,6 +44,7 @@ test-dry-run.js
 # Temporary files
 *.tmp
 *.temp
+_slask/
 
 # AI/Development tools (not needed in repo)
 instructions/
@@ -56,14 +58,55 @@ workspace-manifest.json
 COMMIT_READY.md
 PROJECT_COMPLETE.md
 PROJECT_STATUS.md
+CHANGELOG.md
+STATUS_AND_NEXT_STEPS.md
+SESSION_END_SUMMARY.md
+QUICK_START_NEXT_STEPS.md
+QUICK_TEST.md
+RUN_FIX_DEPLOYMENT.md
+RUN_SETUP_ON_SERVER.md
+SETUP_EXECUTED.md
+SETUP_SSH_ISSUE.md
+COMPLETE_SETUP_SUMMARY.md
+
+# Development documentation (not needed for deployment)
+docs/PLAN.md
+docs/COPY_REVIEW.md
+docs/CHROME_DEVTOOLS.md
+docs/DEPLOYMENT_CHECKLIST.md
+docs/DEPLOYMENT_DATABASES.md
+docs/DEPLOYMENT_FINAL_STEPS.md
+docs/DEPLOYMENT_NEXT_STEPS.md
+docs/DEPLOYMENT_OMEGA.md
+docs/DEPLOYMENT_STATUS.md
+docs/DEPLOYMENT_VERIFICATION.md
+docs/PROD_DEBUG_REPORT.md
+docs/NEXT_STEPS_GUIDE.md
+docs/FIX_DATABASE_ACCESS.md
+docs/TEST_DATABASE_NOW.md
+docs/TEST_DATABASE_SSH.md
+docs/TEST_DATABASE.md
+docs/DATABASE_CREDENTIALS.md
+docs/databas.txt
+docs/decisions/
+docs/Chrome Devtools MCP isolerade profiler per instans.md
 
 # Templates (not needed in repo)
 tools/TEMPLATE_*.md
-docs/decisions/000-template.md
+tools/README.md
 
-# Scripts (keep only essential ones)
+# Scripts (keep only essential ones for deployment)
+# Note: Scripts/cleanup-cron.js and Scripts/run-migrations.js are needed for deployment
 Scripts/test-*.js
 Scripts/new-workspace.ps1
+Scripts/start-chrome-devtools-mcp.js  # Development tool
+
+# Development tools (not needed for deployment)
+tools/ai-commit.js
+tools/log-session.js
+tools/verify-models.js
+tools/start-chrome-devtools-mcp.js
+tools/mcp.json
 
 # Session history (already covered but explicit)
 session_history/

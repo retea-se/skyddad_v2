@@ -1,7 +1,0 @@
-{
-  "chrome-devtools": {
-    "command": "node",
-    "args": ["tools/start-chrome-devtools-mcp.js", "--headless=true", "--viewport=1920x1080"],
-    "env": {}
-  }
-}

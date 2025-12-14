@@ -1,0 +1,18 @@
+# Passenger configuration for Skyddad v2
+PassengerEnabled On
+PassengerAppRoot /home/mackaneu/skyddad-v2-app
+PassengerAppType node
+PassengerStartupFile dist/src/server.js
+PassengerNodejs /home/mackaneu/.nvm/versions/node/v22.20.0/bin/node
+
+# Security headers
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set X-XSS-Protection "1; mode=block"
+</IfModule>
+
+# Disable directory listing
+Options -Indexes
+
+

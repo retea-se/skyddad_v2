@@ -2,19 +2,49 @@
 
 <p>{{t "success.description"}}</p>
 
-<div class="link-container">
-  <input type="text" id="link" value="{{viewUrl}}" readonly>
-  <button onclick="copyLink()">{{t "success.copyButton"}}</button>
+<div class="link-container" role="group" aria-label="{{t "success.linkLabel" default="Länk till hemlighet"}}">
+  <label for="link" class="sr-only">{{t "success.linkLabel" default="Länk till hemlighet"}}</label>
+  <input type="text" id="link" value="{{viewUrl}}" readonly aria-label="{{t "success.linkLabel" default="Länk till hemlighet"}}" aria-describedby="link-help">
+  <button id="copy-button" onclick="copyLink(event)" aria-label="{{t "success.copyButton"}}">{{t "success.copyButton"}}</button>
+  <small id="link-help" class="sr-only">{{t "success.linkHelp" default="Kopiera länken för att dela den"}}</small>
 </div>
 
-<p class="warning">{{t "success.warning"}}</p>
+<div class="warning" role="alert" aria-live="polite">
+  <p>{{t "success.warning"}}</p>
+</div>
 
 <script>
-function copyLink() {
+async function copyLink(event) {
   const linkInput = document.getElementById('link');
-  linkInput.select();
-  document.execCommand('copy');
-  alert('{{t "success.copied"}}');
+  const link = linkInput.value;
+  const button = event ? event.target : document.getElementById('copy-button');
+
+  try {
+    // Use modern Clipboard API if available
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      await navigator.clipboard.writeText(link);
+    } else {
+      // Fallback for older browsers
+      linkInput.select();
+      linkInput.setSelectionRange(0, 99999); // For mobile devices
+      document.execCommand('copy');
+    }
+
+    // Show feedback
+    const originalText = button.textContent;
+    button.textContent = '{{t "success.copied"}}';
+    button.style.backgroundColor = 'var(--color-success-bg)';
+    button.style.color = 'var(--color-success-text)';
+
+    setTimeout(() => {
+      button.textContent = originalText;
+      button.style.backgroundColor = '';
+      button.style.color = '';
+    }, 2000);
+  } catch (err) {
+    console.error('Failed to copy:', err);
+    alert('{{t "success.copyError" default="Kunde inte kopiera länken. Välj och kopiera manuellt."}}');
+  }
 }
 </script>
 

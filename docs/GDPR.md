@@ -186,3 +186,6 @@ Tillfällig överföring av hemlig text via säker engångsdelning.
 |-------|---------|-----------|
 | 2025-01-XX | GDPR-dokumentation skapad | AI-assistent |
 
+
+
+

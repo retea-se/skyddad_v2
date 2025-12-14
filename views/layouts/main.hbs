@@ -1,23 +1,54 @@
 <!DOCTYPE html>
-<html lang="{{locale}}">
+<html lang="{{locale}}" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{title}} - {{t "app.title"}}</title>
   {{#if meta}}{{> meta-tags}}{{/if}}
   {{#if meta}}{{> structured-data}}{{/if}}
-  <link rel="stylesheet" href="/css/main.css">
+  <link rel="preload" href="{{basePath}}/css/main.css" as="style">
+  <link rel="stylesheet" href="{{basePath}}/css/main.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <meta name="theme-color" content="#1E6BA5" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0F1419" media="(prefers-color-scheme: dark)">
+  <link rel="icon" type="image/svg+xml" href="{{basePath}}/favicon.svg">
+  <link rel="apple-touch-icon" href="{{basePath}}/favicon.svg">
+  <link rel="manifest" href="{{basePath}}/site.webmanifest">
+  <link rel="sitemap" type="application/xml" href="{{basePath}}/sitemap.xml">
+  <meta name="robots" content="index, follow">
+  <meta name="googlebot" content="index, follow">
 </head>
 <body>
+  <a href="#main-content" class="skip-to-main">{{t "accessibility.skipToMain" default="Hoppa till huvudinnehåll"}}</a>
   <header>
-    {{> language-switcher}}
+    <div class="header-controls">
+      {{> language-switcher}}
+      <button class="theme-toggle" aria-label="{{t "accessibility.toggleTheme" default="Växla tema"}}" aria-pressed="false" title="{{t "accessibility.toggleTheme" default="Växla ljust/mörkt tema"}}">
+        <svg class="theme-icon moon-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+        <svg class="theme-icon sun-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:none;">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+      </button>
+    </div>
   </header>
-  <main>
+  <main id="main-content">
     {{{body}}}
   </main>
   {{> cookie-consent}}
-  <script src="/js/cookie-consent.js"></script>
+  <script src="{{basePath}}/js/theme-toggle.js" defer></script>
+  <script src="{{basePath}}/js/cookie-consent.js" defer></script>
 </body>
 </html>
 

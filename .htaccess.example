@@ -1,0 +1,22 @@
+# Passenger configuration for Skyddad v2
+# Place this in ~/public_html/retea/skyddad/.htaccess
+
+PassengerEnabled On
+PassengerAppRoot /home/mackaneu/skyddad-v2-app
+PassengerAppType node
+PassengerStartupFile dist/server.js
+PassengerNodejs /home/mackaneu/.nvm/versions/node/v18.x.x/bin/node
+
+# Security headers (if not already in root .htaccess)
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set X-XSS-Protection "1; mode=block"
+</IfModule>
+
+# Disable directory listing
+Options -Indexes
+
+
+
+

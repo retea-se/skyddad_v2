@@ -21,3 +21,6 @@ export const hashUserAgent = (userAgent: string): string => {
   return crypto.createHash('sha256').update(browserType).digest('hex');
 };
 
+
+
+

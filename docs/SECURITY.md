@@ -107,3 +107,6 @@ Vid säkerhetsincident:
 |-------|---------|-----------|
 | 2025-01-XX | Security documentation skapad | AI-assistent |
 
+
+
+

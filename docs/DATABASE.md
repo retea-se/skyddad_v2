@@ -123,3 +123,6 @@ Körs automatiskt via cron (`scripts/cleanup-cron.js`):
 |-------|---------|-----------|
 | 2025-01-XX | Database documentation skapad | AI-assistent |
 
+
+
+

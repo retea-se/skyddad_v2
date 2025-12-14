@@ -22,7 +22,7 @@ let metrics: Metrics = {
 /**
  * Metrics middleware - track requests and errors
  */
-export const metricsMiddleware = (req: Request, res: Response, next: NextFunction): void => {
+export const metricsMiddleware = (_req: Request, res: Response, next: NextFunction): void => {
   if (!config.features.metrics) {
     return next();
   }
@@ -66,4 +66,7 @@ export const resetMetrics = (): void => {
     startTime: new Date(),
   };
 };
+
+
+
 

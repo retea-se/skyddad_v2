@@ -1,4 +1,5 @@
 import session from 'express-session';
+import type { RequestHandler } from 'express';
 import { config } from '../../config/index.js';
 
 /**
@@ -6,7 +7,7 @@ import { config } from '../../config/index.js';
  * Dev: in-memory store
  * Prod: MySQL store (if available)
  */
-export const sessionMiddleware = session({
+export const sessionMiddleware: RequestHandler = session({
   secret: config.session.secret,
   resave: false,
   saveUninitialized: false,
@@ -18,4 +19,7 @@ export const sessionMiddleware = session({
     maxAge: 60 * 60 * 1000, // 1 hour
   },
 });
+
+
+
 

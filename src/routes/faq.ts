@@ -2,7 +2,7 @@ import { Router, Request, Response } from 'express';
 import { getLocale, t } from '../services/i18n.js';
 import { getFAQ } from '../services/faq.js';
 
-const router = Router();
+const router: Router = Router();
 
 /**
  * GET /faq - FAQ page (SEO and AI-friendly)

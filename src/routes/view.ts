@@ -8,7 +8,7 @@ import { hashIP, hashUserAgent } from '../utils/anonymize.js';
 import { viewSecretRateLimit } from '../middleware/rateLimit.js';
 import { getLocale, t } from '../services/i18n.js';
 
-const router = Router();
+const router: Router = Router();
 
 const MAX_PIN_ATTEMPTS = 5;
 

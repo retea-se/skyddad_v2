@@ -13,14 +13,26 @@ const envFile = process.env.NODE_ENV === 'production'
   ? '.env.test'
   : '.env.development';
 
-dotenv.config({ path: path.resolve(__dirname, '..', envFile) });
-dotenv.config({ path: path.resolve(__dirname, '..', '.env') }); // Override with .env if exists
+// Load .env file - try multiple paths for different environments
+const envPath1 = path.resolve(__dirname, '..', envFile);
+const envPath2 = path.resolve(__dirname, '..', '.env');
+const envPath3 = path.resolve(process.cwd(), envFile);
+const envPath4 = path.resolve(process.cwd(), '.env');
+
+// Try loading in order (first found wins)
+dotenv.config({ path: envPath1 });
+dotenv.config({ path: envPath2 }); // Override with .env if exists
+dotenv.config({ path: envPath3 }); // Also try from process.cwd()
+dotenv.config({ path: envPath4 }); // Also try .env from process.cwd()
 
 // Schema for environment variables
 const envSchema = z.object({
   NODE_ENV: z.enum(['development', 'production', 'test']).default('development'),
   PORT: z.string().transform(Number).pipe(z.number().int().positive()).default('3000'),
   APP_ENV: z.enum(['local', 'staging', 'prod']).optional(),
+
+  // Base path for mounting app (e.g., '/skyddad' for retea.se/skyddad)
+  BASE_PATH: z.string().default(''),
 
   // Database
   DB_HOST: z.string().min(1),
@@ -52,6 +64,10 @@ const envSchema = z.object({
   ENABLE_METRICS: z.string().transform(val => val === 'true').default('true'),
 });
 
+// Debug: log BASE_PATH before validation
+console.log('[Config] BASE_PATH from process.env:', process.env.BASE_PATH);
+console.log('[Config] NODE_ENV:', process.env.NODE_ENV);
+
 // Validate and parse environment variables
 const parseResult = envSchema.safeParse(process.env);
 
@@ -69,6 +85,7 @@ export const config = {
     env: env.NODE_ENV,
     appEnv: env.APP_ENV || env.NODE_ENV,
     port: env.PORT,
+    basePath: env.BASE_PATH,
   },
   database: {
     host: env.DB_HOST,
@@ -101,5 +118,11 @@ export const config = {
   },
 } as const;
 
+// Debug: log final basePath
+console.log('[Config] Final basePath:', config.app.basePath);
+
 export type Config = typeof config;
+
+
+
 

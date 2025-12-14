@@ -32,10 +32,18 @@
 
 ## Scriptkörning & timeouts
 
-- När du genererar exempel för scripts (Node, shell, PowerShell, Docker):
-  - Inkludera alltid rimlig timeout/avslutshantering.
+- **KRITISKT**: Kör ALDRIG SSH, SCP eller andra nätverkskommandon direkt via terminal tools. Detta hänger sig och blockera hela chat-sessionen.
+- **För SSH/SCP**: Använd ALLTID wrapper-scripts:
+  - SSH: `Scripts/safe-ssh.ps1 "command"`
+  - SCP: `Scripts/safe-scp.ps1 -Source "file" -Destination "path"`
+  - Dessa scripts har inbyggda timeouts och körs i bakgrunden.
+- **För andra kommandon**: Generera scripts (PowerShell `.ps1`, bash `.sh`, etc.) som användaren kan köra själv i sin egen terminal.
+- När du genererar scripts (Node, shell, PowerShell, Docker):
+  - Inkludera alltid rimlig timeout/avslutshantering i varje kommando.
+  - För PowerShell: använd `Start-Job` med `Wait-Job -Timeout` för långvariga kommandon.
   - Undvik långvariga blockande kommandon utan timeout.
   - För Docker: använd i första hand detached (`up -d`) och begräns loggoutput.
+- **Undantag**: Endast mycket korta lokala kommandon (t.ex. `ls`, `pwd`, `git status`) får köras direkt, max 2-3 sekunder.
 
 ## Testning & kvalitet
 

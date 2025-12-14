@@ -1,10 +1,12 @@
 <h1>{{t "view.title"}}</h1>
 
-<div class="secret-display">
-  <pre>{{secret}}</pre>
+<div class="secret-display" role="region" aria-label="{{t "view.title"}}">
+  <pre aria-label="{{t "view.secretLabel" default="Meddelande"}}">{{secret}}</pre>
 </div>
 
-<p class="warning">{{t "view.warning"}}</p>
+<div class="warning" role="alert" aria-live="polite">
+  <p>{{t "view.warning"}}</p>
+</div>
 
-<a href="/">{{t "view.createNew"}}</a>
+<a href="{{basePath}}/" class="btn-primary">{{t "view.createNew"}}</a>
 

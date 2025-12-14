@@ -1,4 +1,4 @@
-import { t, getLocale, setLocale } from '../../src/services/i18n.js';
+import { t } from '../../src/services/i18n.js';
 
 describe('i18n Service', () => {
   test('should translate Swedish text', () => {
@@ -26,4 +26,7 @@ describe('i18n Service', () => {
     expect(translation).toBe('Skapa länk');
   });
 });
+
+
+
 

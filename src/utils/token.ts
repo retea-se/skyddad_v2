@@ -15,6 +15,10 @@ export const generateToken = (secretId: string): string => {
  */
 export const validateToken = (secretId: string, token: string): boolean => {
   const expectedToken = generateToken(secretId);
+  // Check length first to avoid timing attack on length
+  if (token.length !== expectedToken.length) {
+    return false;
+  }
   return crypto.timingSafeEqual(
     Buffer.from(token),
     Buffer.from(expectedToken)
@@ -27,4 +31,7 @@ export const validateToken = (secretId: string, token: string): boolean => {
 export const generateSecretId = (): string => {
   return crypto.randomBytes(32).toString('hex');
 };
+
+
+
 

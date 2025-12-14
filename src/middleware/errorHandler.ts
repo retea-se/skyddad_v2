@@ -7,8 +7,8 @@ import { config } from '../../config/index.js';
  */
 export const sentryErrorHandler = (
   err: Error,
-  req: Request,
-  res: Response,
+  _req: Request,
+  _res: Response,
   next: NextFunction
 ): void => {
   if (config.features.sentry) {
@@ -26,4 +26,7 @@ export const sentryRequestHandler = Sentry.Handlers.requestHandler();
  * Sentry tracing handler
  */
 export const sentryTracingHandler = Sentry.Handlers.tracingHandler();
+
+
+
 

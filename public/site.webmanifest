@@ -1,0 +1,18 @@
+{
+  "name": "Skyddad - Säker engångsdelning",
+  "short_name": "Skyddad",
+  "description": "Säker engångsdelning av hemligheter",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FAFBFC",
+  "theme_color": "#1E6BA5",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
+

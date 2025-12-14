@@ -19,3 +19,6 @@
 - [ ] Jag har lagt till tester som bevisar att min fix är effektiv eller att min feature fungerar
 - [ ] Nya och befintliga enhetstester passerar lokalt med mina ändringar
 
+
+
+
